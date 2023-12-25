@@ -14,7 +14,10 @@ public interface IProductoService {
 	
 	public void deleteProducto(Long id_producto_eliminar);
 	
-	public void editProducto(Long id_producto, Producto pro);	
+	public void editProducto(Long id_producto, Producto pro);
+	
+	//restar cantidad de ventas
+	public Producto stockDisponible(Producto stockProducto);
 	
 
 }

@@ -56,4 +56,10 @@ public class ProductoService implements IProductoService {
 
 	}
 
+	@Override
+	public Producto stockDisponible(Producto stockProducto) {
+		
+		return null;
+	}
+
 }

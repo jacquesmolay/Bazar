@@ -62,7 +62,7 @@ public class VentaController {
 		
 		vtaServ.deleteVenta(id_venta_buscar);
 		
-		return "venta Eliminada";
+		return "Venta Eliminada";
 	}
 
 }

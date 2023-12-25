@@ -18,6 +18,8 @@ public interface IVentaService {
 	public void deleteVenta(Long id_venta_eliminar);
 	
 	public void editVenta(Long codigo_venta, Venta vta);
+	
+	
 
 	
 
