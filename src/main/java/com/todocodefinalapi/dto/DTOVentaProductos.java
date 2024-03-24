@@ -2,6 +2,8 @@ package com.todocodefinalapi.dto;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
@@ -21,6 +23,7 @@ public class DTOVentaProductos {
 	@Id
 	private Long codigo_producto;
 	private String nombre;
+
 	private Long codigo_venta;
 	@Temporal(TemporalType.DATE)	
 	private LocalDate fecha_venta;	

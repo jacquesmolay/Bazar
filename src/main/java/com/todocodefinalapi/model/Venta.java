@@ -3,6 +3,8 @@ package com.todocodefinalapi.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,12 +36,12 @@ public class Venta {
 	
 	private double total;	
 	
-	@OneToMany
+	@OneToMany	
 	@JoinTable(name="venta_lista_productos",
 			joinColumns=@JoinColumn(name="venta_codigo_venta"),
-			inverseJoinColumns=@JoinColumn(name="lista_productos_codigo_producto"))
+			inverseJoinColumns=@JoinColumn(name="lista_productos_codigo_producto"))	 
 	List<Producto>listaProductos;
 	
 	@OneToOne
-	Cliente unCliente;
+	private Cliente unCliente;
 }

@@ -54,7 +54,7 @@ public class VentaController {
 		
 		return "Venta Editada Correctamente";
 		
-	}
+	}	
 	
 	
 	@DeleteMapping("/eliminar_venta/{id_venta_buscar}")

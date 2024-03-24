@@ -20,6 +20,8 @@ public interface IVentaService {
 	public void editVenta(Long codigo_venta, Venta vta);
 	
 	
+	
+	
 
 	
 
