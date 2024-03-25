@@ -3,7 +3,10 @@ package com.todocodefinalapi.service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -122,19 +125,36 @@ public class VentaService implements IVentaService {
 	@Override
 	public List <String> listaProductosVendidos(Long id_venta) {
 		
+		int cantidad_vendidas=0;
+		//busco venta
 		Venta vta_buscar=vtaRepo.findById(id_venta).orElse(null);
+		//guardo productos
 		List<Producto>productos_compra=new ArrayList<Producto>();
+		//lista donde almacenamos los nombres de los articulos vendidos
 		List <String> nombre_producto=new ArrayList<>();
 		
 		for(int i=0;i<vta_buscar.getListaProductos().size();i++) {
+			//recorro lista para saber si existen repetidos
+			for(int z=0;z<vta_buscar.getListaProductos().size();z++) {
+				
+				if(vta_buscar.getListaProductos().get(i).getNombre().equalsIgnoreCase(vta_buscar.getListaProductos().get(z).getNombre())) {
+					
+					cantidad_vendidas=cantidad_vendidas+1;
+					
+				}				
+				
+			}
 			
-			
+			//agrego el producto a buscar
 			productos_compra.add(proServ.findProducto(vta_buscar.getListaProductos().get(i).getCodigo_producto()));
-			nombre_producto.add(productos_compra.get(i).getNombre());
-			
+			//agrego el nombre del producto a la lista, indicando la cantidad
+			nombre_producto.add(productos_compra.get(i).getNombre()+" "+Integer.toString(cantidad_vendidas)+" unidades vendidas");
+			cantidad_vendidas=0;
 		}
 		
-		
+		  
+		//elimino duplicados de la lista
+		nombre_producto = nombre_producto.stream().distinct().collect(Collectors.toList());
 		
 		return nombre_producto;
 	}
