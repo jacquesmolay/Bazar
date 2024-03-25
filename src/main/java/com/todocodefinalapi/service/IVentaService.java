@@ -19,10 +19,7 @@ public interface IVentaService {
 	
 	public void editVenta(Long codigo_venta, Venta vta);
 	
-	
-	
-	
-
+	public List <String> listaProductosVendidos(Long id_venta);
 	
 
 }

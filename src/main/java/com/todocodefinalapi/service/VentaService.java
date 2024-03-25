@@ -119,6 +119,26 @@ public class VentaService implements IVentaService {
 
 	}
 
+	@Override
+	public List <String> listaProductosVendidos(Long id_venta) {
+		
+		Venta vta_buscar=vtaRepo.findById(id_venta).orElse(null);
+		List<Producto>productos_compra=new ArrayList<Producto>();
+		List <String> nombre_producto=new ArrayList<>();
+		
+		for(int i=0;i<vta_buscar.getListaProductos().size();i++) {
+			
+			
+			productos_compra.add(proServ.findProducto(vta_buscar.getListaProductos().get(i).getCodigo_producto()));
+			nombre_producto.add(productos_compra.get(i).getNombre());
+			
+		}
+		
+		
+		
+		return nombre_producto;
+	}
+
 	
 
 }
