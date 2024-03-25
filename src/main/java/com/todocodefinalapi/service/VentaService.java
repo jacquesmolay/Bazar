@@ -36,19 +36,19 @@ public class VentaService implements IVentaService {
 	@Override
 	public void saveVenta(Venta vta) {
 		
+		
 		//lista que contiene productos de la venta
-		List<Producto> todos_productos=new ArrayList<Producto>();
 		List<Long>codigos=new ArrayList<Long>();
 		List<Long>contado=new ArrayList<Long>();
 		boolean repetido=false;
 				
 		Producto producto_buscar;
-				
 		
-		//vta es la venta
-		
+		//vta es la venta		
 		int ventas=0;
-		long producto_venta=0;
+		long producto_venta=0;		
+		
+	
 		
 		//recorro venta a grabar, con lista de productos
 		
@@ -69,11 +69,13 @@ public class VentaService implements IVentaService {
 			producto_buscar=proServ.findProducto(producto_venta);
 			producto_buscar.setCantidad_disponible(producto_buscar.getCantidad_disponible()-ventas);
 				
-				
-				if (producto_buscar.getCantidad_disponible()>0) {
+			System.out.println("cantidad disponible "+producto_buscar.getCantidad_disponible());
+				if (producto_buscar.getCantidad_disponible()>=0) {
 					
-					
+					System.out.println("entre producto >0 ");
 					proServ.editProducto(producto_buscar.getCodigo_producto(), producto_buscar);
+					System.out.println(codigos);
+					vtaRepo.save(vta);
 					System.out.println("descuento "+producto_buscar.getNombre());
 					
 				}else {
@@ -82,19 +84,13 @@ public class VentaService implements IVentaService {
 				}
 				
 				ventas=0;
-				contado.remove(0);
-				//dentro
-				
-			
-			
-			
-		
+				contado.remove(0);					
 			
 		}
 					
-						
+		/*				
 		System.out.println(codigos);
-		vtaRepo.save(vta);
+		vtaRepo.save(vta);*/
 		
 
 	}
