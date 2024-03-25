@@ -21,5 +21,7 @@ public interface IVentaService {
 	
 	public List <String> listaProductosVendidos(Long id_venta);
 	
+	public String totalDia(LocalDate fecha_venta);
+	
 
 }

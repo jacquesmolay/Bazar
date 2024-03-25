@@ -159,6 +159,28 @@ public class VentaService implements IVentaService {
 		return nombre_producto;
 	}
 
+	@Override
+	public String totalDia(LocalDate venta_fecha) {
+		
+		double total_ventas_dias=0;
+		int n_ventas_dias=0;
+		String cuadratura_dia;
+		List<Venta> vta=new ArrayList<Venta>();
+		vta=vtaRepo.cierreDia(venta_fecha);
+		
+		
+		for(int i=0;i<vta.size();i++) {
+			
+			total_ventas_dias=total_ventas_dias+vta.get(i).getTotal();
+			n_ventas_dias=n_ventas_dias+vta.get(i).getListaProductos().size();
+		}
+		
+		cuadratura_dia="Nº productos vendidos "+n_ventas_dias+" total recaudado en el dia "+total_ventas_dias;
+		
+		return cuadratura_dia;
+		
+	}
+
 	
 
 }

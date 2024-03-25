@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -69,6 +69,15 @@ public class VentaController {
 	public List<String>productosVentas(@PathVariable Long id_venta_buscar){
 		
 		return vtaServ.listaProductosVendidos(id_venta_buscar);
+	}
+	
+	
+	@GetMapping("/cierre_dia/{venta_fecha}")
+	public String finalDia(@PathVariable LocalDate venta_fecha) {
+		
+		String mensaje_dia=vtaServ.totalDia(venta_fecha);
+		
+		return mensaje_dia;
 	}
 
 }
