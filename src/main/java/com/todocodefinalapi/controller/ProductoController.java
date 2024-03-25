@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.todocodefinalapi.dto.DTOProductoSinStock;
 import com.todocodefinalapi.model.Producto;
 import com.todocodefinalapi.service.ProductoService;
 
@@ -37,6 +38,13 @@ public class ProductoController {
 		return proServ.findProducto(id_buscar_producto);
 	}
 	
+	@GetMapping("/listar_falta_stock")
+	public List<Producto> alertStock(){
+		
+		return proServ.stockDisponible();
+	}
+	
+	
 	@PostMapping("/crear_producto")
 	public String saveProducto(@RequestBody Producto prod) {
 		
@@ -55,6 +63,7 @@ public class ProductoController {
 		
 	}
 	
+		
 	@DeleteMapping("/eliminar_producto/{id_producto_eliminar}")
 	public String deleteProducto(@PathVariable Long id_producto_eliminar) {
 		

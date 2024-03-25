@@ -16,8 +16,9 @@ public interface IProductoService {
 	
 	public void editProducto(Long id_producto, Producto pro);
 	
-	//restar cantidad de ventas
-	public Producto stockDisponible(Producto stockProducto);
+	//stock productos menor a 5
+	public List<Producto> stockDisponible();
 	
+		
 
 }

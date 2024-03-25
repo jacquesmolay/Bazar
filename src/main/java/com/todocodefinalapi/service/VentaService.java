@@ -33,9 +33,9 @@ public class VentaService implements IVentaService {
 		return vta;
 	}
 
+	
 	@Override
 	public void saveVenta(Venta vta) {
-		
 		
 		//lista que contiene productos de la venta
 		List<Long>codigos=new ArrayList<Long>();
@@ -47,8 +47,7 @@ public class VentaService implements IVentaService {
 		//vta es la venta		
 		int ventas=0;
 		long producto_venta=0;		
-		
-	
+			
 		
 		//recorro venta a grabar, con lista de productos
 		
@@ -59,39 +58,40 @@ public class VentaService implements IVentaService {
 						
 		}
 		
-		//recorro un codigo
+		//recorro lista codigos que tiene todos los productos de la venta
 		for(int i=0;i<codigos.size();i++) {
 			
 			//el codigo lo guardo en contado
 			contado.add(codigos.get(i));
+			
+			//sumo la venta
 			ventas=ventas+1;
+			//producto venta guardo el codigo del producto
 			producto_venta=contado.get(0);
+			//busco el producto
 			producto_buscar=proServ.findProducto(producto_venta);
+			//resto las ventas
 			producto_buscar.setCantidad_disponible(producto_buscar.getCantidad_disponible()-ventas);
 				
-			System.out.println("cantidad disponible "+producto_buscar.getCantidad_disponible());
+			//valido si despues del descuento el stock es mayor o igual a cero
 				if (producto_buscar.getCantidad_disponible()>=0) {
 					
-					System.out.println("entre producto >0 ");
+					//si es asi hago el descuento y la modificacion
 					proServ.editProducto(producto_buscar.getCodigo_producto(), producto_buscar);
 					System.out.println(codigos);
-					vtaRepo.save(vta);
-					System.out.println("descuento "+producto_buscar.getNombre());
+					vtaRepo.save(vta);					
 					
 				}else {
 					
+					//si no, indico que no esxiste stock de ese producto
 					System.out.println("Producto "+producto_buscar.getNombre()+" "+"sin stock");
 				}
 				
+				//ventas es igual a cero y borro el unico objeto de la lista
 				ventas=0;
 				contado.remove(0);					
 			
 		}
-					
-		/*				
-		System.out.println(codigos);
-		vtaRepo.save(vta);*/
-		
 
 	}
 

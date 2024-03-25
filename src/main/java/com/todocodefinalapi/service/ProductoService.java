@@ -1,9 +1,11 @@
 package com.todocodefinalapi.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.todocodefinalapi.model.Producto;
 import com.todocodefinalapi.repository.IProductoRepository;
@@ -57,9 +59,21 @@ public class ProductoService implements IProductoService {
 	}
 
 	@Override
-	public Producto stockDisponible(Producto stockProducto) {
+	public List<Producto> stockDisponible() {
 		
-		return null;
+		List<Producto> bajoStock=new ArrayList<Producto>();
+
+		bajoStock=prodRepo.alertaStock();
+		
+			
+		if(bajoStock.isEmpty()) {
+						
+			System.out.println("TODOS LOS PRODUCTOS EN STOCK");
+		}
+		
+		
+		return bajoStock;		
+		
 	}
 
 }
